@@ -43,9 +43,10 @@ public class MyLinkedList{
  }
 
  public void add(int index, String value){
+
  }
  public String get(int index){
-   return "";
+   return getNode(index).getData();
  }
  public String set(int index, String value){
    return "";
