@@ -22,6 +22,26 @@ public class MyLinkedList{
    }
    return true;
  }
+
+ private Node getNode(int index){
+   Node thisNode=new Node("");
+   if (index<0 || index>=size){
+     throw new IndexOutOfBoundsException ("Index"+index+"is out of bounds!");
+   }
+   if (Math.abs(size-index) > Math.abs(0-index)){
+
+     for (int i= size-1; i>=index; i--){
+       thisNode=end.getPrev();
+     }
+   }
+   else{
+     for (int i= 0; i<=index;i++){
+       thisNode=start.getNext();
+     }
+   }
+   return thisNode;
+ }
+
  public void add(int index, String value){
  }
  public String get(int index){
