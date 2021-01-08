@@ -23,28 +23,32 @@ public class MyLinkedList{
      end=newNode;
      newNode=temp;
      end.setNext(null);
+     end.setPrev(newNode);
      size++;
    }
    return true;
  }
 
  private Node getNode(int index){
-   Node thisNode=new Node("");
    if (index<0 || index>size){
      throw new IndexOutOfBoundsException ("Index"+index+"is out of bounds!");
    }
-   if (Math.abs(size-index) > Math.abs(0-index)){
-
-     for (int i= size-1; i>=index; i--){
-       thisNode=end.getPrev();
+   if (Math.abs(size-index) < Math.abs(0-index)){
+     Node thisNode=end;
+     /*System.out.println(end.getPrev().getData());*/
+     for (int i= size; i>=index; i--){
+       thisNode=thisNode.getPrev();
+       /*System.out.println(i);*/
      }
+     return thisNode;
    }
    else{
+     Node thisNode=start;
      for (int i= 0; i<=index;i++){
-       thisNode=start.getNext();
+       thisNode=thisNode.getNext();
      }
+     return thisNode;
    }
-   return thisNode;
  }
 
  public void add(int index, String value){
@@ -64,9 +68,12 @@ public class MyLinkedList{
      this.add(value);
    }
    {
-     Node oldPrev= getNode(index).getPrev();
+     Node oldHere= getNode(index);
+     Node oldPrev= getNode(index-1);
+     oldHere.setPrev(newNode);
      oldPrev.setNext(newNode);
-     getNode(index).setPrev(newNode);
+     newNode.setPrev(oldPrev);
+     newNode.setNext(oldHere);
    }
    size ++;
  }
@@ -74,8 +81,9 @@ public class MyLinkedList{
    return getNode(index).getData();
  }
  public String set(int index, String value){
+   String previous=getNode(index).getData();
    getNode(index).setData(value);
-   return getNode(index).getData();
+   return previous;
  }
  public String toString(){
    String printedList= "[";
