@@ -43,7 +43,10 @@ public class MyLinkedList{
  }
 
  public void add(int index, String value){
-
+   Node newNode= new Node(value);
+   Node oldPrev= getNode(index).getPrev();
+   oldPrev.setNext(newNode);
+   getNode(index).setPrev(newNode);
  }
  public String get(int index){
    return getNode(index).getData();
