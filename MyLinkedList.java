@@ -14,10 +14,15 @@ public class MyLinkedList{
      start = end = NewNode;
      size++;
    }
+   else{
+     end.setNext(NewNode);
+     NewNode.setPrev(end);
+     end.setNext(null);
+     size++;
+   }
    return true;
  }
- public boolean add(int index, String value){
-   return true;
+ public void add(int index, String value){
  }
  public String get(int index){
    return "";
