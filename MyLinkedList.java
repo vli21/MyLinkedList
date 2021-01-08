@@ -52,7 +52,8 @@ public class MyLinkedList{
    return getNode(index).getData();
  }
  public String set(int index, String value){
-   return "";
+   getNode(index).setData(value);
+   return getNode(index).getData();
  }
  public String toString(){
    return "";
