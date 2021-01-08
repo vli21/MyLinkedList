@@ -56,7 +56,11 @@ public class MyLinkedList{
    return getNode(index).getData();
  }
  public String toString(){
-   return "";
+   String printedList= "[";
+   for(int i=0;i<size;i++){
+     printedList+=getNode(i).getData() + ",";
+   }
+   return printedList.substring(0,size-1)+"]";
  }
  //Any helper method that returns a Node object MUST BE PRIVATE!
 }
