@@ -1,6 +1,7 @@
 public class MyLinkedList{
  private int size;
  private Node start,end;
+ 
  public MyLinkedList(){
    start=null;
    end =null;
@@ -8,6 +9,7 @@ public class MyLinkedList{
  public int size(){
    return size;
  }
+
  public boolean add(String value){
    Node newNode= new Node(value);
    if (size==0){
@@ -29,27 +31,16 @@ public class MyLinkedList{
    return true;
  }
 
- private Node getNode(int index){
+ private Node getNode(int index)throws IndexOutOfBoundsException{
    if (index<0 || index>size){
      throw new IndexOutOfBoundsException ("Index"+index+"is out of bounds!");
    }
-   if (Math.abs(size-index) < Math.abs(0-index)){
-     Node thisNode=end;
-     /*System.out.println(end.getPrev().getData());*/
-     for (int i= size; i>=index; i--){
-       thisNode=thisNode.getPrev();
-       /*System.out.println(i);*/
-     }
-     return thisNode;
-   }
-   else{
      Node thisNode=start;
-     for (int i= 0; i<=index;i++){
+     for (int i= 0; i<index;i++){
        thisNode=thisNode.getNext();
      }
      return thisNode;
    }
- }
 
  public void add(int index, String value){
    Node newNode= new Node(value);
@@ -77,14 +68,17 @@ public class MyLinkedList{
    }
    size ++;
  }
+
  public String get(int index){
    return getNode(index).getData();
  }
+
  public String set(int index, String value){
    String previous=getNode(index).getData();
    getNode(index).setData(value);
    return previous;
  }
+
  public String toString(){
    String printedList= "[";
    Node tobePrinted=start;
