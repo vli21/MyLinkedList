@@ -9,14 +9,19 @@ public class MyLinkedList{
    return size;
  }
  public boolean add(String value){
-   Node NewNode= new Node(value);
-   if (start== null){
-     start = end = NewNode;
+   Node newNode= new Node(value);
+   if (size==0){
+     start = newNode;
+     end = newNode;
+     start.setPrev(null);
+     end.setNext(null);
      size++;
    }
    else{
-     end.setNext(NewNode);
-     NewNode.setPrev(end);
+     Node temp= end;
+     end.setNext(newNode);
+     end=newNode;
+     newNode=temp;
      end.setNext(null);
      size++;
    }
@@ -25,7 +30,7 @@ public class MyLinkedList{
 
  private Node getNode(int index){
    Node thisNode=new Node("");
-   if (index<0 || index>=size){
+   if (index<0 || index>size){
      throw new IndexOutOfBoundsException ("Index"+index+"is out of bounds!");
    }
    if (Math.abs(size-index) > Math.abs(0-index)){
@@ -44,9 +49,26 @@ public class MyLinkedList{
 
  public void add(int index, String value){
    Node newNode= new Node(value);
-   Node oldPrev= getNode(index).getPrev();
-   oldPrev.setNext(newNode);
-   getNode(index).setPrev(newNode);
+   if (size==0){
+     this.add(value);
+   }
+   else if (index == 0){
+     Node temp= start;
+     start.setPrev(newNode);
+     start=newNode;
+     newNode=temp;
+     start.setPrev(null);
+
+   }
+   else if (index == size){
+     this.add(value);
+   }
+   {
+     Node oldPrev= getNode(index).getPrev();
+     oldPrev.setNext(newNode);
+     getNode(index).setPrev(newNode);
+   }
+   size ++;
  }
  public String get(int index){
    return getNode(index).getData();
@@ -57,10 +79,20 @@ public class MyLinkedList{
  }
  public String toString(){
    String printedList= "[";
+   Node tobePrinted=start;
    for(int i=0;i<size;i++){
-     printedList+=getNode(i).getData() + ",";
+     if (tobePrinted==null){
+       printedList+="null";
+     }
+     else if (i== size-1){
+       printedList+=tobePrinted.getData();
+     }
+     else{
+       printedList+=tobePrinted.getData() + ",";
+     }
+     tobePrinted=tobePrinted.getNext();
    }
-   return printedList.substring(0,size-1)+"]";
+   return printedList +"]";
  }
  //Any helper method that returns a Node object MUST BE PRIVATE!
 }
