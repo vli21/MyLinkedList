@@ -27,6 +27,7 @@ public class Tester{
     testing.remove(4);
     System.out.println(testing.size());
     System.out.println(testing.toString());
+    System.out.println(testing.toStringReversed());
     testing.remove(0);
     System.out.println(testing.size());
     System.out.println(testing.toString());

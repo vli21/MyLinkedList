@@ -93,17 +93,16 @@ public class MyLinkedList{
      return before;
    }
    if(index==0){
-			start = start.getNext();
-			start.getPrev().setNext(null);
-			start.setPrev(null);
-			size--;
-			return before;
+     start = start.getNext();
+		 start.getPrev().setNext(null);
+		 start.setPrev(null);
+     size --;
+     return before;
    }
    if (index==size-1){
-     Node newend= getNode(size-2);
-     end.setPrev(null);
-     newend.setNext(null);
-     newend=end;
+      end = end.getPrev();
+			end.getNext().setPrev(null);
+			end.setNext(null);
      size --;
      return before;
    }
@@ -117,6 +116,25 @@ public class MyLinkedList{
      size --;
      return before;
 
+ }
+
+ public void extend(MyLinkedList other){
+   if (start == null) {
+     start = other.start;
+     end = other.end;
+     other.start = null;
+     other.end = null;
+     other.size = 0;
+   }
+   else{
+     end.setNext(other.start);
+     end = other.end;
+     other.start.setPrev(end);
+     size += other.size();
+     other.start = null;
+     other.end = null;
+     other.size = 0;
+   }
  }
 
  public String toString(){
