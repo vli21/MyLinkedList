@@ -1,7 +1,7 @@
 public class MyLinkedList{
  private int size;
  private Node start,end;
- 
+
  public MyLinkedList(){
    start=null;
    end =null;
@@ -79,12 +79,52 @@ public class MyLinkedList{
    return previous;
  }
 
+ public String remove(int index)throws IndexOutOfBoundsException {
+   if (index < 0 || index >= size()){
+     throw new IndexOutOfBoundsException("Index"+index+"is out of bounds!");
+   }
+
+   String before= getNode(index).getData();
+
+   if (size==1){
+     start=null;
+     end=null;
+     size --;
+     return before;
+   }
+   if(index==0){
+			start = start.getNext();
+			start.getPrev().setNext(null);
+			start.setPrev(null);
+			size--;
+			return before;
+   }
+   if (index==size-1){
+     Node newend= getNode(size-2);
+     end.setPrev(null);
+     newend.setNext(null);
+     newend=end;
+     size --;
+     return before;
+   }
+     Node Prev= getNode(index-1);
+     Node After=getNode(index+1);
+     Node Removed=getNode(index);
+     Prev.setNext(After);
+     After.setPrev(Prev);
+     Removed.setNext(null);
+     Removed.setPrev(null);
+     size --;
+     return before;
+
+ }
+
  public String toString(){
    String printedList= "[";
    Node tobePrinted=start;
    for(int i=0;i<size;i++){
      if (tobePrinted==null){
-       printedList+="null";
+       printedList+="";
      }
      else if (i== size-1){
        printedList+=tobePrinted.getData();
@@ -93,6 +133,24 @@ public class MyLinkedList{
        printedList+=tobePrinted.getData() + ",";
      }
      tobePrinted=tobePrinted.getNext();
+   }
+   return printedList +"]";
+ }
+
+ public String toStringReversed(){
+   String printedList= "[";
+   Node tobePrinted=end;
+   for(int i=size-1;i>=0;i--){
+     if (tobePrinted==null){
+       printedList+="";
+     }
+     else if (i==0){
+       printedList+=tobePrinted.getData();
+     }
+     else{
+       printedList+=tobePrinted.getData() + ",";
+     }
+     tobePrinted=tobePrinted.getPrev();
    }
    return printedList +"]";
  }

@@ -12,13 +12,24 @@ public class Node{
    return data;
  }
 
- public Node Next(){
+ public Node getNext(){
    return next;
  }
 
- public Node Prev(){
+ public Node getPrev(){
    return prev;
  }
+ public void setData(String value){
+   data=value;
+ }
+ public void setNext(Node n){
+   next = n;
+ }
+ public void setPrev(Node n){
+   prev = n;
+ }
+
+
 
  //write get/set methods for all three instance variables.
 }
